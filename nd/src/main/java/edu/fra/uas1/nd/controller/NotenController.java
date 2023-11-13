@@ -15,10 +15,19 @@ public class NotenController {
 
     @Autowired
     private NotenService notenService;
+   
 
     @RequestMapping(value = "/durchschnitt", method = RequestMethod.GET)
     @ResponseBody
     public double notenDurchschnitt(int[] noten) {
         return notenService.berechnenDurchschnitt(noten);
+    }
+    // Test-Endpunkt nur für Testzwecke
+    @RequestMapping(value = "/test/durchschnitt", method = RequestMethod.GET)
+    @ResponseBody
+    public double testNotenDurchschnitt() {
+        // Testdaten hier zuweisen
+        int[] testNoten = {80, 75, 90, 85};
+        return notenService.berechnenDurchschnitt(testNoten);
     }
 }
