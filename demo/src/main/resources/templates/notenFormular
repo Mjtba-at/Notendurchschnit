@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noten Durchschnitt</title>
+</head>
+<body>
+    <h1>Noten Durchschnitt</h1>
+
+    <!-- Formular für die Eingabe von Noten -->
+    <form action="/durchschnitt" method="post">
+        <label for="noten">Noten eingeben (kommagetrennt):</label>
+        <input type="text" id="noten" name="noten" th:required="true">
+        <button type="submit">Berechnen</button>
+    </form>
+
+    <!-- Anzeige des Durchschnitts (wird nach dem Absenden des Formulars aktualisiert) -->
+    <h2>Durchschnitt: <span th:text="${durchschnitt}"></span></h2>
+
+</body>
+</html>

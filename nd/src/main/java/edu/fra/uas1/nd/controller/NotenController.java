@@ -2,31 +2,32 @@ package edu.fra.uas1.nd.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.fra.uas1.nd.notenService.NotenService;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class NotenController {
 
     @Autowired
     private NotenService notenService;
-   
 
-    @RequestMapping(value = "/durchschnitt", method = RequestMethod.GET)
-    @ResponseBody
-    public double notenDurchschnitt(int[] noten) {
-        return notenService.berechnenDurchschnitt(noten);
+    @GetMapping("/")
+    public String zeigeNotenFormular() {
+        return "notenFormular";
     }
-    // Test-Endpunkt nur für Testzwecke
-   // @RequestMapping(value = "/test/durchschnitt", method = RequestMethod.GET)
-  //  @ResponseBody
-   // public double testNotenDurchschnitt() {
-        // Testdaten hier zuweisen
-    //    int[] testNoten = {80, 75, 90, 85};
-      //  return notenService.berechnenDurchschnitt(testNoten);
-    //}
+
+    @RequestMapping(value = "/durchschnitt", method = RequestMethod.POST)
+
+    public String notenDurchschnitt(@RequestParam int[] noten, Model model) {
+        double durchschnitt = notenService.berechnenDurchschnitt(noten);
+    model.addAttribute("durchschnitt", durchschnitt);
+        return "notenFormular.html";
+    }
+    
 }
